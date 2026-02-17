@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modalidades - Quiz Islam</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/modalidade.css">
+    <link rel="icon" href="image/QuizIslam.png" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Ion Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* Estilos do Dropdown (podes mover para CSS/style.css depois) */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            position: relative;
+            z-index: 100;
+        }
+
+        .help-dropdown {
+            position: relative;
+        }
+
+        .help-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color, #3b82f6);
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .help-btn:hover,
+        .help-btn:focus {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .help-btn ion-icon {
+            font-size: 1.4rem;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: var(--secondary-color, #1e293b);
+            min-width: 280px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 10;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 1rem 1.2rem;
+            color: var(--text-color, #e2e8f0);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--accent-color);
+        }
+
+        .dropdown-item ion-icon {
+            font-size: 1.6rem;
+            color: var(--accent-color);
+        }
+
+        .dropdown-item strong {
+            color: var(--gold-color, #f59e0b);
+        }
+
+        @media (max-width: 768px) {
+            .help-btn { font-size: 1rem; padding: 0.5rem 0.8rem; }
+            .dropdown-content { min-width: 260px; right: auto; left: 50%; transform: translateX(-50%); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    <div class="islamic-pattern"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="image/QuizIslam.png" alt="Quiz Islam Logo">
+            </a>
+        </div>
+
+        <!-- Dropdown de Reportar Erro / Ajuda -->
+        <div class="help-dropdown">
+            <button class="help-btn" onclick="toggleDropdown()">
+                <ion-icon name="help-circle-outline"></ion-icon>
+                Reportar Erro / Ajuda
+            </button>
+            
+            <div id="helpDropdown" class="dropdown-content">
+                <a href="https://wa.me/258875530757?text=Olá!%20Encontrei%20um%20problema%20numa%20questão%20do%20Quiz%20Islam.%20Pode%20corrigir?%0A%0A•%20Categoria%3A%20%5Bex%3A%20Alcorão%2C%20Profeta%20Muhammad%2C%20Sahabas%5D%0A•%20Questão%20nº%20ou%20parte%20da%20pergunta%3A%20%5Bdescreva%20ou%20cole%20aqui%5D%0A•%20O%20que%20está%20errado%3A%20%5Bex%3A%20opção%20errada%20marcada%20como%20certa%2C%20versículo%20incorreto%2C%20redação%20confusa%2C%20falta%20de%20contexto%5D%0A%0AEstou%20a%20enviar%20foto%20da%20questão.%20Obrigado%20e%20JazakAllah%20khair!" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="dropdown-item">
+                    <ion-icon name="alert-circle-outline"></ion-icon>
+                    <div>
+                        <strong>Reportar erro numa questão</strong><br>
+                        <small>Envie foto,explique o problema (vamos corrigir inshaAllah)</small>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="modalidades-container">
+        <div class="modalidades-header">
+            <div class="header-content">
+                <h1 class="page-title">Modalidades</h1>
+                <p class="page-subtitle">Escolha uma categoria para testar seu conhecimento</p>
+            </div>
+        </div>
+
+        <div class="modalidades-grid">
+            <!-- Alcorão Card -->
+            <div class="modalidade-card available">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-image">
+                            <img src="image/Alcorão.jpeg" alt="Alcorão Sagrado">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Ver detalhes</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Alcorão Sagrado</h3>
+                            <p class="card-description">Conhecimento sobre o Livro Sagrado</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <h4>Alcorão Sagrado</h4>
+                            <ul class="features-list">
+                                <li>Surahs e versículos</li>
+                                <li>Histórias dos profetas</li>
+                                <li>Contexto histórico</li>
+                                <li>Ensino do Alcorão</li>
+                            </ul>
+                        </div>
+                        <a href="alcorao.html" class="card-btn">
+                            <ion-icon name="play" style="margin-right: 5px;"></ion-icon>
+                            Começar Quiz
+                        </a>
+                    </div>
+                </div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- Profeta Muhammad Card -->
+            <div class="modalidade-card available">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-image">
+                            <img src="image/Muhammad.jpeg" alt="Profeta Muhammad">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Ver detalhes</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Profeta Muhammad (ﷺ)</h3>
+                            <p class="card-description">Vida e ensinamentos do Profeta</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <h4>Profeta Muhammad</h4>
+                            <ul class="features-list">
+                                <li>Vida do Profeta</li>
+                                <li>Seus ensinamentos</li>
+                                <li>Batalhas e conquistas</li>
+                                <li>Milagres e sinais</li>
+                            </ul>
+                        </div>
+                        <a href="muhammad.html" class="card-btn">
+                            <ion-icon name="play" style="margin-right: 5px;"></ion-icon>
+                            Começar Quiz
+                        </a>
+                    </div>
+                </div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- Profetas Card -->
+            <div class="modalidade-card coming-soon">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-image">
+                            <img src="image/profetas.jpeg" alt="Profetas do Islã">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Ver detalhes</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Profetas do Islã</h3>
+                            <p class="card-description">História dos Mensageiros</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <h4>Profetas do Islã</h4>
+                            <ul class="features-list">
+                                <li>25 Profetas mencionados</li>
+                                <li>Suas histórias e milagres</li>
+                                <li>Lições e moralidades</li>
+                                <li>Contexto histórico</li>
+                            </ul>
+                        </div>
+                        <a href="profetas.html" class="card-btn">
+                            <ion-icon name="play" style="margin-right: 5px;"></ion-icon>
+                            Começar Quiz
+                        </a>
+                    </div>
+                </div>
+                <div class="card-glow"></div>
+            </div>
+
+            <!-- Sahabas Card -->
+            <div class="modalidade-card available">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="card-image">
+                            <img src="image/suahabas.jpg" alt="Sahabas - Companheiros do Profeta" loading="lazy">
+                            <div class="image-overlay">
+                                <div class="overlay-text">Ver detalhes</div>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Sahabas</h3>
+                            <p class="card-description">Companheiros do Profeta ﷺ</p>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <div class="card-back-content">
+                            <h4>Sahabas</h4>
+                            <ul class="features-list">
+                                <li>Biografias</li>
+                                <li>Contribuições históricas</li>
+                                <li>Narrativas e hadiths</li>
+                                <li>Lições de vida</li>
+                            </ul>
+                        </div>
+                        <a href="suahabas.html" class="card-btn">
+                            <ion-icon name="play" style="margin-right: 5px;"></ion-icon>
+                            Começar Quiz
+                        </a>
+                    </div>
+                </div>
+                <div class="card-glow"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="JS/script.js"></script>
+
+    <!-- Script do Dropdown -->
+    <script>
+        function toggleDropdown() {
+            const dropdown = document.getElementById("helpDropdown");
+            dropdown.classList.toggle("show");
+        }
+
+        // Fecha ao clicar fora
+        window.onclick = function(event) {
+            if (!event.target.matches('.help-btn') && !event.target.closest('.help-btn')) {
+                const dropdowns = document.getElementsByClassName("dropdown-content");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>

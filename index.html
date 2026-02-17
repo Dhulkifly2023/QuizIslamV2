@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Quiz Islam - Teste seu conhecimento</title>
+    <meta name="description" content="Bem-vindo ao Quiz Islam, uma plataforma de questionário dedicada a explorar conhecimentos sobre o Alcorão e o Profeta Muhammad (SAW).">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="IMAGE/QuizIslam.png" type="image/x-icon">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<!-- Ion Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <style>
+        .ramadan-modal {
+            display: flex;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .ramadan-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        .ramadan-image {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .ramadan-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent-color);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .ramadan-close-btn:hover {
+            background: var(--gold-color);
+            transform: rotate(90deg);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ramadan-modal.hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-overlay"></div>
+    <div class="particles-container" id="particles-js"></div>
+    <div class="islamic-pattern"></div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="image/QuizIslam.png" alt="Quiz Islam Logo">
+        </div>
+        
+    </nav>
+
+    <header class="header">
+        <div class="header-content">
+            <div class="header-text">
+                <div class="greeting">
+                    <h2 class="salam">Assalamu Aleikum</h2>
+                    <h2 class="welcome">Bem-vindo ao</h2>
+                </div>
+               <h2 class="typing-text">
+                <span class="highlight-islam">Quiz Islam</span>
+            </h2>
+                <p class="description">Especial Ramadan Mubarak</p>
+                <div class="cta-container">
+                    <a class="jogar-btn" href="menuPrincipal.html">
+                        <span>Começar Quiz</span>
+                        <div class="btn-overlay"></div>
+                    </a>
+                </div>
+
+               <div class="redesSociais">
+    <div class="social-icon whatsapp">
+        <a href="https://wa.me/258875530757?text=Assalamu Alaikum%C3%A1!%20Ser%C3%A1%20que%20tem%20alguma%20d%C3%BAvida%20sobre%20uma%20das%20quest%C3%B5es%20do%20Quiz%20Islam%2C%20ou%20acha%20que%20alguma%20pergunta%20est%C3%A1%20errada%2Fprecisa%20de%20corre%C3%A7%C3%A3o%3F%20Estou%20aqui%20para%20ajudar%20inshaAllah." 
+           aria-label="WhatsApp - Envie sua dúvida ou sugestão" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>
+                <ion-icon name="logo-whatsapp"></ion-icon>
+            </span>
+        </a>
+    </div>
+
+    <div class="social-icon instagram">
+        <a href="https://www.instagram.com/dhulkifly_malique" 
+           aria-label="Instagram" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>
+                <ion-icon name="logo-instagram"></ion-icon>
+            </span>
+        </a>
+    </div>
+
+    <div class="social-icon pinterest">
+        <a href="https://br.pinterest.com/quizislam/" 
+           aria-label="Pinterest" 
+           target="_blank" 
+           rel="noopener noreferrer">
+            <span>
+                <ion-icon name="logo-pinterest"></ion-icon>
+            </span>
+        </a>
+    </div>
+</div>
+            </div>
+
+            <div class="header-image">
+               <div class="image-container">
+                    <div class="outer-circle">
+                        <div class="inner-circle">
+                            <img class="portfolio-image" src="image/Discover beautiful Ramadan decorations, printable… (1).jpg" alt="Imagem representativa do Quiz Islam">
+                        </div>
+                    </div>
+                    <div class="floating-elements">
+                        <div class="floating-element element-1"></div>
+                        <div class="floating-element element-2"></div>
+                        <div class="floating-element element-3"></div>
+                        <div class="floating-element element-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>Role para baixo</span>
+        </div>
+    </header>
+
+    <footer>
+        <div class="rodape">
+            <div class="foot-image">
+                <img src="image/QuizIslam.png" alt="Quiz Islam Logo" height="200" width="200">
+            </div>
+            <div class="textos-rodape">
+                <a href="sobreNos.html">Sobre Nós</a>
+                <a href="contato.html">Contato</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>© 2026 Quiz Islam | Feito por amor ao nosso profeta Muhammad (SAW)</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script type="module" src="https:// unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script>
+        // Abrir modal de Ramadã ao carregar a página
+        window.addEventListener('load', () => {
+            const modal = document.getElementById('ramadanModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+            }
+        });
+
+        // Fechar modal ao clicar fora da imagem
+        document.getElementById('ramadanModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'ramadanModal') {
+                fecharModalRamadan();
+            }
+        });
+
+        // Fechar modal com tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                fecharModalRamadan();
+            }
+        });
+
+        function fecharModalRamadan() {
+            const modal = document.getElementById('ramadanModal');
+            if (modal) {
+                modal.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+
+</html>

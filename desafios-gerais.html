@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Desafios Gerais - Quiz Islam</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">
+    <link rel="icon" href="image/QuizIslam.png" type="image/x-icon">
+
+    <!-- IonIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<style>
+    .escolha-container {
+    background: var(--secondary-color);
+    border-radius: var(--border-radius);
+    padding: 2.8rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.escolha-container h2 {
+    font-family: 'Amiri', serif;
+    font-size: 2.8rem;
+    color: var(--accent-color);
+    margin-bottom: 0.6rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+}
+
+.configuracao-desafio {
+    max-width: 480px;
+    margin: 0 auto;
+}
+.modo-selecao h3 {
+    margin: 1.5rem 0 1.2rem;
+    font-size: 1.35rem;
+    color: var(--text-color);
+}
+
+.contador-tempo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-left: auto;
+}
+
+.btn-iniciar-desafio {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-iniciar-desafio:hover {
+    background: var(--gold-color);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.btn-iniciar-desafio:active {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.btn-iniciar-desafio ion-icon {
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-iniciar-desafio:hover ion-icon {
+    transform: rotate(180deg) scale(1.1);
+}
+</style>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="image/QuizIslam.png" alt="Quiz Islam Logo">
+            </a>
+        </div>
+       
+    </nav>
+
+    <div class="quiz-wrapper">
+
+        <!-- Tela inicial de escolha -->
+        <div id="tela-escolha" class="escolha-container">
+            <h2>Desafios Gerais</h2>
+            <p class="subtitle">Perguntas misturadas do Alcorão e da Sīra do Profeta ﷺ</p>
+
+            <div class="configuracao-desafio">
+                <button class="btn-iniciar-desafio" onclick="iniciarDesafioGeral()">
+                    Começar o Desafio
+                    <ion-icon name="shuffle-outline"></ion-icon>
+                </button>
+            </div>
+        </div>
+
+        <!-- Área do Quiz -->
+        <div id="tela-quiz" class="quiz-screen" style="display:none;">
+            <div class="quiz-header">
+                <h3 id="titulo-desafio">Desafio Geral</h3>
+                <span id="contador-pergunta" hidden></span>
+                <span id="contador-tempo" class="contador-tempo">15</span>
+            </div>
+
+            <div id="pergunta-texto" class="pergunta-texto"></div>
+
+            <div id="opcoes-container" class="opcoes-container"></div>
+
+            <div id="explicacao-box" class="explicacao-box"></div>
+
+            <button id="btn-proxima" class="btn-proxima" disabled>
+                Próxima <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+        </div>
+
+        <!-- Resultado -->
+        <div id="tela-resultado" class="result-screen" style="display:none;">
+            <h2 class="resultado-titulo">Resultado do Desafio</h2>
+
+            <div class="circulo-progresso" id="circulo-progresso">
+                <span id="percentual-final">0%</span>
+            </div>
+
+            <div class="estatisticas-grid">
+                <div class="estat-item">
+                    <strong>Acertos</strong><br>
+                    <span id="acertos">0</span>
+                </div>
+                <div class="estat-item">
+                    <strong>Erros</strong><br>
+                    <span id="erros">0</span>
+                </div>
+                <div class="estat-item">
+                    <strong>Percentual</strong><br>
+                    <span id="percentual-texto">0%</span>
+                </div>
+                <div class="estat-item">
+                    <strong>Status</strong><br>
+                    <span id="status-final">—</span>
+                </div>
+            </div>
+
+            <div class="botoes-finais">
+                <button class="btn-nivel" onclick="reiniciarDesafio()">
+                    Novo Desafio
+                </button>
+                <button class="btn-nivel voltar" onclick="window.location.href='menuPrincipal.html'">
+                    Voltar ao Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/desafios-gerais.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

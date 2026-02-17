@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sobre Nós - Quiz Islam</title>
+    <meta name="description" content="Conheça o Quiz Islam: plataforma educativa e interativa para aprender sobre o Alcorão, a Sīra do Profeta Muhammad (S.A.W.) e os Sahaba.">
+    <meta name="keywords" content="quiz islã, alcorão quiz, sira profeta, sahaba, islam quiz, quiz islâmico, profeta muhammad">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="image/QuizIslam.png" type="image/x-icon">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Ion Icons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --secondary-color: #1e293b;
+            --accent-color: #3b82f6;
+            --gold-color: #f59e0b;
+            --text-color: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-radius: 16px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .about-container {
+            max-width: 1000px;
+            margin: 3rem auto;
+            padding: 2rem;
+            background: var(--secondary-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-header h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: var(--primary-color);
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .about-section h2 {
+            color: var(--accent-color);
+            font-family: 'Amiri', serif;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .about-section h2 ion-icon {
+            font-size: 2.5rem;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card ion-icon {
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        /* ──────────────────────────────────────── */
+        /* Nova seção Desenvolvedor - Clean & Elegante */
+        /* ──────────────────────────────────────── */
+
+        .developer-section {
+            background: var(--secondary-color);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.15);
+            margin: 3rem 0;
+        }
+
+        .developer-section h2 {
+            color: white;
+            font-family: 'Amiri', serif;
+            font-size: 2.4rem;
+            margin-bottom: 1.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        .developer-content {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .developer-name {
+            font-family: 'Amiri', serif;
+            font-size: 2.2rem;
+            color: var(--accent-color);
+            margin-bottom: 0.6rem;
+        }
+
+        .developer-tag {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .developer-bio p {
+            font-size: 1.08rem;
+            line-height: 1.9;
+            color: var(--text-color);
+            margin-bottom: 1.4rem;
+        }
+
+        .developer-bio .highlight {
+            color: var(--gold-color);
+            font-weight: 500;
+        }
+
+        .social-links {
+            margin-top: 2.5rem;
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .social-link:hover {
+            color: var(--accent-color);
+            transform: translateY(-4px);
+        }
+
+        .social-link ion-icon {
+            font-size: 2.8rem;
+            margin-bottom: 0.6rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover ion-icon {
+            color: var(--accent-color);
+            filter: drop-shadow(0 0 12px rgba(59, 130, 246, 0.5));
+            transform: scale(1.15);
+        }
+
+        .social-link.instagram:hover ion-icon {
+            color: #e1306c;
+        }
+
+        .social-link.whatsapp:hover ion-icon {
+            color: #25D366;
+        }
+
+        .cta-button {
+            display: inline-block;
+            margin-top: 2.5rem;
+            padding: 1rem 2.8rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background:rgb(0, 158, 250);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .about-container { padding: 1.8rem; margin: 2rem auto; }
+            .about-header h1 { font-size: 2.4rem; }
+            .developer-section { padding: 2.5rem 1.5rem; }
+            .social-links { gap: 2rem; }
+            .social-link ion-icon { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="image/QuizIslam.png" alt="Quiz Islam Logo">
+            </a>
+        </div>
+    </nav>
+
+    <div class="about-container">
+        <div class="about-header">
+            <h1>Sobre Quiz Islam</h1>
+        </div>
+
+        <!-- Missão -->
+        <div class="about-section">
+            <h2> Nossa Missão</h2>
+            <p>Quiz Islam foi criado com a missão da revisão  do aprendizado sobre as questões basicas  do Alcorão,Sīra (biografia) do Profeta Muhammad (S.A.W), Profetas e Suahabas acessível, divertido e educativo para pessoas de todas as idades. Acreditamos que o conhecimento islâmico deve ser compartilhado.</p>
+        </div>
+
+        <!-- Recursos -->
+        <div class="about-section">
+            <h2> Principais Recursos</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <ion-icon name="book-outline"></ion-icon>
+                    <h3>Quizzes do Alcorão</h3>
+                    <p>Perguntas sobre suratas, versículos, significados, contexto da revelação e lições práticas com níveis fácil, médio e difícil.</p>
+                </div>
+                <div class="feature-card">
+                    <ion-icon name="person-outline"></ion-icon>
+                    <h3>Sīra do Profeta (S.A.W.)</h3>
+                    <p>Explore a vida abençoada, os milagres, o caráter e os ensinamentos do melhor dos seres criados.</p>
+                </div>
+                <div class="feature-card">
+                    <ion-icon name="people-outline"></ion-icon>
+                    <h3>Os Sahaba</h3>
+                    <p>Conheça as histórias de fé, coragem e sacrifício dos companheiros do Profeta os melhores da Ummah depois dos Profetas.</p>
+                </div>
+                <div class="feature-card">
+                    <ion-icon name="game-controller-outline"></ion-icon>
+                    <h3>Modo Multiplayer</h3>
+                    <p>Desafie amigos e familiares em tempo real, com rodadas alternadas e placar ao vivo.</p>
+                </div>
+                <div class="feature-card">
+                    <ion-icon name="shuffle-outline"></ion-icon>
+                    <h3>Desafios Mistos</h3>
+                    <p>Modo aleatório com perguntas de todas as categorias para testar o conhecimento geral.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Desenvolvedor - Versão Clean & Elegante -->
+        <div class="developer-section">
+            <h2>Desenvolvedor</h2>
+            <div class="developer-content">
+                <div class="developer-name">Dhulkifli Amisse</div>
+                <div class="developer-tag">Criador e Desenvolvedor do Quiz Islam</div>
+
+                <div class="developer-bio">
+                    <p>Feito com amor ao Islam e ao nosso amado Profeta Muhammad (S.A.W.).</p>
+                    
+                    <p>Quiz Islam é um projeto voluntário dedicado a ajudar a Ummah a aprender e revisar o conhecimento islâmico de forma moderna, interativa e agradável.</p>
+                    
+                    <p>Construído com tecnologias atuais, priorizando usabilidade, desempenho e uma experiência fluida em qualquer dispositivo  celular ou computador.</p>
+                    
+                    <p class="highlight">É um trabalho em constante evolução inshaAllah sempre melhorando e adicionando mais conteúdos.</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.instagram.com/dhulkifly_malique" target="_blank" rel="noopener noreferrer" class="social-link instagram">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                        <span>Instagram</span>
+                    </a>
+
+                    <a href="https://wa.me/258875530757" target="_blank" rel="noopener noreferrer" class="social-link whatsapp">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div style="text-align: center; margin: 4rem 0 2rem;">
+            <h3 style="color: var(--accent-color); margin-bottom: 1.8rem; font-size: 1.5rem;">
+                Pronto para começar a aprender e se desafiar?
+            </h3>
+            <a href="menuPrincipal.html" class="cta-button">Ir para os Quizzes Agora</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="rodape">
+            <div class="foot-image">
+                <img src="image/QuizIslam.png" alt="Quiz Islam Logo" height="180" width="180">
+            </div>
+            <div class="textos-rodape">
+                <a href="sobreNos.html">Sobre Nós</a>
+                <a href="contato.html">Contato</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2025–2026 Quiz Islam | Feito com amor e dedicação ao nosso Profeta Muhammad (S.A.W.)</p>
+            <p>Desenvolvido por Dhulkifli AMisse</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

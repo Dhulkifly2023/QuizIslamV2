@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quiz Profeta - Quiz Islam</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/quiz.css">  <!-- ou reutilize quiz.css se preferir -->
+    <link rel="icon" href="image/QuizIslam.png" type="image/x-icon">
+
+    <!-- IonIcons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="image/QuizIslam.png" alt="Quiz Islam Logo">
+            </a>
+        </div>
+       
+    </nav>
+
+    <div class="quiz-wrapper">
+
+        <!-- 1. Seleção de nível -->
+        <div id="tela-niveis" class="nivel-selection">
+            <h2>Profetas</h2>
+            <p class="subtitle">Escolha o nível de dificuldade</p>
+            <div class="nivel-buttons">
+                <button class="btn-nivel" onclick="comecarNivel('iniciante')">Iniciante</button>
+                <button class="btn-nivel" onclick="comecarNivel('intermediario')">Intermediário</button>
+                <button class="btn-nivel" onclick="comecarNivel('avancado')">Avançado</button>
+            </div>
+        </div>
+
+        <!-- 2. Quiz -->
+        <div id="tela-quiz" class="quiz-screen" style="display:none;">
+            <div class="quiz-header">
+                <h3 id="nivel-titulo">Nível: Iniciante</h3>
+                <span id="contador-pergunta">Pergunta 1 de 15</span>
+            </div>
+
+            <div id="pergunta-texto" class="pergunta-texto"></div>
+
+            <div id="opcoes-container" class="opcoes-container"></div>
+
+            <div id="explicacao-box" class="explicacao-box"></div>
+
+            <button id="btn-proxima" class="btn-proxima" disabled>
+                Próxima <ion-icon name="arrow-forward"></ion-icon>
+            </button>
+        </div>
+
+        <!-- 3. Resultado -->
+        <div id="tela-resultado" class="result-screen" style="display:none;">
+            <h2 class="resultado-titulo">Resultado</h2>
+
+            <div class="circulo-progresso" id="circulo-progresso">
+                <span id="percentual-final">0%</span>
+            </div>
+
+            <div class="estatisticas-grid">
+                <div class="estat-item">
+                    <strong>Acertos</strong><br>
+                    <span id="acertos">0</span>
+                </div>
+                <div class="estat-item">
+                    <strong>Erros</strong><br>
+                    <span id="erros">0</span>
+                </div>
+                <div class="estat-item">
+                    <strong>Percentual</strong><br>
+                    <span id="percentual-texto">0%</span>
+                </div>
+                <div class="estat-item">
+                    <strong>Status</strong><br>
+                    <span id="status-final">—</span>
+                </div>
+            </div>
+
+            <div class="botoes-finais">
+                <button id="btn-proximo-nivel" class="btn-nivel" style="display:none;">
+                    Próximo Nível
+                </button>
+                <button class="btn-nivel" onclick="reiniciarNivel()">
+                    Refazer este nível
+                </button>
+                <button class="btn-nivel voltar" onclick="window.location.href='menuPrincipal.html'">
+                    Voltar ao Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/profetas.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

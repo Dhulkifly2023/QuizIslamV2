@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer - Quiz Islam</title>
+    <link rel="stylesheet" href="CSS/multiplayer.css">
+    <link rel="stylesheet" href="CSS/multiplayer-responsive.css">
+    <link rel="icon" href="IMAGEM/QuizIslam.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    <div class="islamic-pattern"></div>
+
+    <div class="container">
+
+       
+
+        <!-- TELA DE CONFIGURAÇÃO -->
+        <div id="config-screen" class="screen active">
+            <div class="header">
+                <h1 class="title">Multiplayer</h1>
+            </div>
+            <div class="config-container">
+                <div class="config-card">
+                    <h3>Configuração do Jogo</h3>
+                    <div class="input-group">
+                        <label for="player1">Jogador 1</label>
+                        <input type="text" id="player1" placeholder="Nome do Jogador 1" value="Jogador 1">
+                    </div>
+                    <div class="input-group">
+                        <label for="player2">Jogador 2</label>
+                        <input type="text" id="player2" placeholder="Nome do Jogador 2" value="Jogador 2">
+                    </div>
+                    <div class="input-group">
+                        <label for="game-mode">Modo de Jogo</label>
+                        <select id="game-mode" onchange="toggleGameMode()">
+                            <option value="questions">Por Número de Questões</option>
+                            <option value="time">Por Tempo</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="questions-group">
+                        <label for="num-questions">Número de Questões</label>
+                        <select id="num-questions">
+                            <option value="5">5 Questões</option>
+                            <option value="10" selected>10 Questões</option>
+                            <option value="15">15 Questões</option>
+                            <option value="20">20 Questões</option>
+                        </select>
+                    </div>
+                    <div class="input-group" id="time-group" style="display: none;">
+                        <label for="game-time">Tempo de Jogo (minutos)</label>
+                        <select id="game-time">
+                            <option value="1">1 Minuto</option>
+                            <option value="2">2 Minutos</option>
+                            <option value="3" selected>3 Minutos</option>
+                            <option value="5">5 Minutos</option>
+                            <option value="10">10 Minutos</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="category">Categoria</label>
+                        <select id="category">
+                            <option value="all" selected>Todas as Categorias</option>
+                        </select>
+                    </div>
+                    <button class="btn-start" onclick="iniciarJogo()">
+                        <ion-icon name="play-circle-outline"></ion-icon>
+                        Iniciar Jogo
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TELA DE RESULTADO -->
+        <div id="result-screen" class="screen">
+            <div class="result-container">
+                <h2 class="result-title">Fim do Jogo!</h2>
+                <div class="result-cards">
+                    <div class="result-card" id="result-player1">
+                        <div class="result-avatar">1</div>
+                        <div class="result-info">
+                            <div class="result-name" id="result-name1">Jogador 1</div>
+                            <div class="result-score" id="result-score1">0 pontos</div>
+                            <div class="result-stats">
+                                <span class="stat-correct" id="result-correct1">0</span>
+                                <span class="stat-wrong" id="result-wrong1">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="result-card" id="result-player2">
+                        <div class="result-avatar">2</div>
+                        <div class="result-info">
+                            <div class="result-name" id="result-name2">Jogador 2</div>
+                            <div class="result-score" id="result-score2">0 pontos</div>
+                            <div class="result-stats">
+                                <span class="stat-correct" id="result-correct2">0</span>
+                                <span class="stat-wrong" id="result-wrong2">0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="winner-banner" id="winner-banner">
+                    <ion-icon name="trophy-outline"></ion-icon>
+                    <span id="winner-text">Empate!</span>
+                </div>
+                <div class="result-actions">
+                    <button class="btn-restart" onclick="reiniciarJogo()">
+                        <ion-icon name="refresh-outline"></ion-icon> Jogar Novamente
+                    </button>
+                    <button class="btn-menu" onclick="voltarMenu()">
+                        <ion-icon name="home-outline"></ion-icon> Menu Principal
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TELA DO JOGO -->
+        <div id="game-screen" class="screen">
+            <!-- JOGADOR 1 (lado esquerdo) -->
+            <div class="player-question-section player1-flipped" id="player1-section">
+                <div class="section-header">
+                    <div class="player-section-header">
+                        <div class="player-number-badge player1-badge">1</div>
+                        <h3 id="player1-title">Jogador 1</h3>
+                    </div>
+                    <div class="question-counter" id="player1-counter">#1</div>
+                </div>
+                <div class="question-card">
+                  
+                  
+                    <div class="answers-grid" id="player1-answers"></div>
+                     
+                      <h2 class="question-text" id="player1-question">Carregando pergunta...</h2>
+                       <div class="question-category" id="player1-category">Categoria</div>
+                </div>
+            </div>
+
+            <!-- JOGADOR 2 (lado direito) -->
+            <div class="player-question-section" id="player2-section">
+                <div class="section-header">
+                    <div class="player-section-header">
+                        <div class="player-number-badge player2-badge">2</div>
+                        <h3 id="player2-title">Jogador 2</h3>
+                    </div>
+                    <div class="question-counter" id="player2-counter">#1</div>
+                </div>
+                <div class="question-card">
+                    <div class="question-category" id="player2-category">Categoria</div>
+                    <h2 class="question-text" id="player2-question">Carregando pergunta...</h2>
+                    <div class="answers-grid" id="player2-answers"></div>
+                </div>
+            </div>
+        </div>
+         <!-- PLACAR AO VIVO (opcional - mas ajuda muito na visualização) -->
+        <div class="live-scoreboard">
+            <div class="score-player" id="score-p1">Jogador 1: 0 pts</div>
+            <div class="score-player" id="score-p2">Jogador 2: 0 pts</div>
+        </div>
+    </div>
+
+    <script src="JS/modo_escuro.js"></script>
+    <script src="JS/multiplayer.js"></script>
+</body>
+</html>
