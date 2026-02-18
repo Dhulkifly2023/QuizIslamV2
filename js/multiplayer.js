@@ -382,7 +382,7 @@ function verificarResposta(playerNum, idxEscolhido, idxCorreto, questao) {
         if (gameState.gameActive) {
             mostrarQuestaoParaJogador(playerNum);
         }
-    }, 500);
+    }, 1000);
 }
 
 function finalizarJogo() {
