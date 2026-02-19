@@ -202,7 +202,7 @@ function atualizarTimerDisplay() {
 }
 
 // ============================================
-// INICIAR JOGO
+// INICIAR JOGO  —  Versão corrigida para modo por tempo
 // ============================================
 function iniciarJogo() {
     gameState.player1.name = document.getElementById('player1').value.trim() || 'Jogador 1';
@@ -222,26 +222,38 @@ function iniciarJogo() {
     gameState.player2.score = gameState.player2.correct = gameState.player2.wrong = gameState.player2.currentQuestion = 0;
     gameState.player1.usedQuestions.clear();
     gameState.player2.usedQuestions.clear();
+    gameState.player1.queue = [];
+    gameState.player2.queue = [];
 
+    // Filtrar perguntas pela categoria
     let availableQuestions = gameState.category === 'all' 
         ? [...questionBank] 
         : questionBank.filter(q => q.category === gameState.category);
 
-    // Em modo 'questions' criamos filas alternadas para cada jogador
-    if (gameState.gameMode === 'questions') {
-        const shuffled = embaralharArray(availableQuestions);
-        gameState.player1.queue = [];
-        gameState.player2.queue = [];
-        for (let i = 0; i < shuffled.length; i++) {
-            if (i % 2 === 0) gameState.player1.queue.push(shuffled[i]);
-            else gameState.player2.queue.push(shuffled[i]);
-        }
-        // gameState.questions mantém vazio ou pool não usado para este modo
-        gameState.questions = [];
-    } else {
-        // em modo 'time' usamos pool global embaralhado
-        gameState.questions = embaralharArray(availableQuestions);
+    if (availableQuestions.length === 0) {
+        alert("Não há perguntas disponíveis para esta categoria!");
+        return;
     }
+
+    // Embaralhar uma única vez
+    const shuffled = embaralharArray(availableQuestions);
+
+    // Dividir as perguntas entre os dois jogadores (sem sobreposição)
+    gameState.player1.queue = [];
+    gameState.player2.queue = [];
+
+    for (let i = 0; i < shuffled.length; i++) {
+        if (i % 2 === 0) {
+            gameState.player1.queue.push(shuffled[i]);
+        } else {
+            gameState.player2.queue.push(shuffled[i]);
+        }
+    }
+
+    // No modo por tempo: não limitamos por quantidade, mas garantimos que cada um tenha muitas perguntas
+    // (se quiser limitar o máximo de perguntas por jogador no modo tempo, pode adicionar aqui)
+
+    gameState.questions = []; // não usamos mais o pool global
 
     gameState.gameActive = true;
     gameState.answeringLock = false;
@@ -262,16 +274,16 @@ function iniciarJogo() {
         }, 1000);
     }
 
+    // Inicia mostrando a primeira pergunta de cada um
     mostrarQuestaoParaJogador(1);
     mostrarQuestaoParaJogador(2);
 }
 
-// ============================================
-// MOSTRAR PRÓXIMA PERGUNTA
-// ============================================
 function mostrarQuestaoParaJogador(playerNum) {
     const player = gameState[`player${playerNum}`];
 
+    // No modo por tempo: continua enquanto houver perguntas na fila
+    // No modo por quantidade: para quando atingir o limite
     if (gameState.gameMode === 'questions' && player.currentQuestion >= gameState.totalQuestions) {
         if (gameState.player1.currentQuestion >= gameState.totalQuestions &&
             gameState.player2.currentQuestion >= gameState.totalQuestions) {
@@ -280,44 +292,24 @@ function mostrarQuestaoParaJogador(playerNum) {
         return;
     }
 
-    let questao = null;
-
-    if (gameState.gameMode === 'questions') {
-        // Perguntas pré-alocadas por jogador (filas alternadas)
-        if (player.queue && player.currentQuestion < player.queue.length) {
-            questao = player.queue[player.currentQuestion];
-            // marca como usada apenas para consistência (não é necessário para evitar duplicatas entre filas)
-            player.usedQuestions.add(questao.question);
+    // Pegamos da fila exclusiva do jogador
+    if (player.currentQuestion >= player.queue.length) {
+        // Acabaram as perguntas disponíveis para este jogador
+        if (gameState.gameMode === 'time') {
+            // No modo tempo → podemos parar este jogador, mas deixar o outro continuar
+            // ou simplesmente não mostrar mais pergunta para ele
+            document.getElementById(`player${playerNum}-question`).textContent = "Sem mais perguntas disponíveis!";
+            document.getElementById(`player${playerNum}-answers`).innerHTML = "";
+            return;
         } else {
-            player.currentQuestion = gameState.totalQuestions;
-            if (gameState.player1.currentQuestion >= gameState.totalQuestions &&
-                gameState.player2.currentQuestion >= gameState.totalQuestions) {
-                finalizarJogo();
-            }
+            // Modo por quantidade → já deveria ter parado antes
             return;
         }
-    } else {
-        for (const q of gameState.questions) {
-            if (!player.usedQuestions.has(q.question)) {
-                questao = q;
-                break;
-            }
-        }
-
-        if (!questao) {
-            player.currentQuestion = gameState.totalQuestions;
-            if (gameState.gameMode === 'questions' &&
-                gameState.player1.currentQuestion >= gameState.totalQuestions &&
-                gameState.player2.currentQuestion >= gameState.totalQuestions) {
-                finalizarJogo();
-            }
-            return;
-        }
-
-        player.usedQuestions.add(questao.question);
     }
 
-    // Atualiza os textos
+    const questao = player.queue[player.currentQuestion];
+
+    // Atualiza interface
     document.getElementById(`player${playerNum}-question`).textContent = questao.question;
     document.getElementById(`player${playerNum}-category`).textContent = getCategoryName(questao.category);
     
@@ -326,10 +318,7 @@ function mostrarQuestaoParaJogador(playerNum) {
             ? `#${player.currentQuestion + 1}/${gameState.totalQuestions}`
             : `Pergunta ${player.currentQuestion + 1}`;
 
-    // Container das respostas
     const container = document.getElementById(`player${playerNum}-answers`);
-    
-    // Limpeza completa - muito importante!
     container.innerHTML = '';
 
     const respostas = embaralharArray([...questao.answers]);
@@ -337,7 +326,7 @@ function mostrarQuestaoParaJogador(playerNum) {
 
     respostas.forEach((res, idx) => {
         const btn = document.createElement('button');
-        btn.className = 'answer-btn';  // ← só essa classe! Nada de correct/incorrect aqui
+        btn.className = 'answer-btn';
         btn.textContent = res;
 
         btn.onclick = () => {
@@ -349,6 +338,7 @@ function mostrarQuestaoParaJogador(playerNum) {
 
         container.appendChild(btn);
     });
+
 }
 
 function verificarResposta(playerNum, idxEscolhido, idxCorreto, questao) {
