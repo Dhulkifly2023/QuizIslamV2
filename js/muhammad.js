@@ -421,7 +421,7 @@ function mostrarResultado() {
     document.getElementById("percentual-final").textContent = percentual + "%";
 
     let status = "Precisa melhorar";
-    if (percentual >= 80) status = "Excelente! ṣallallāhu ʿalayhi wa sallam";
+    if (percentual >= 80) status = "Excelente!";
     else if (percentual >= 60) status = "Muito bom!";
     else if (percentual >= 40) status = "Razoável";
 
